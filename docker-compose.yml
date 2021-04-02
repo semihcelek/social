@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  node-dev-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    command: npm start
+    environment:
+      - PORT=3000
+      - DB_PASSWORD=postgres
+      - DB_NAME=postgres
+      - DB_HOST=social-media-app_db_1
+      - DB_USER_NAME=postgres
+    ports:
+      - 3000:3000
+    volumes:
+      - ./server/:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    depends_on:
+      - db
+    container_name: node-dev-server
+
+  db:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+    # ports:
+    #   - 5432:5432 ## to connect from outside of the docker-internal network
+    volumes:
+      - ./server/PG_DATA:/var/lib/postgresql/data
+volumes:
+  node_modules:
