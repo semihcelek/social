@@ -10,13 +10,15 @@ services:
       - PORT=3000
       - DB_PASSWORD=postgres
       - DB_NAME=postgres
-      - DB_HOST=social-media-app_db_1
+      - DB_HOST=db
       - DB_USER_NAME=postgres
+      - JWT_SECRET=kdfjleinsljdkjnglkdfi ## such a bad idea
     ports:
       - 3000:3000
     volumes:
       - ./server/:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
+      - /usr/src/app/node_modules
+      # - node_modules:/usr/src/app/node_modules
     depends_on:
       - db
     container_name: node-dev-server
@@ -30,5 +32,6 @@ services:
     #   - 5432:5432 ## to connect from outside of the docker-internal network
     volumes:
       - ./server/PG_DATA:/var/lib/postgresql/data
+    hostname: db
 volumes:
   node_modules:
