@@ -8,11 +8,11 @@ services:
     command: npm start
     environment:
       - PORT=3000
-      - DB_PASSWORD=postgres
-      - DB_NAME=postgres
-      - DB_HOST=db
-      - DB_USER_NAME=postgres
-      - JWT_SECRET=kdfjleinsljdkjnglkdfi ## such a bad idea
+      - DB_PASSWORD ## when no value is specified, it takes from .env
+      - DB_NAME
+      - DB_HOST
+      - DB_USER_NAME
+      - JWT_SECRET
     ports:
       - 3000:3000
     volumes:
@@ -23,11 +23,26 @@ services:
       - db
     container_name: node-dev-server
 
+  react-client-dev:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    command: npm start
+    ports:
+      - 3001:3000
+    volumes:
+      - ./client/:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+      - node-dev-server
+    container_name: react-client-dev
+
   db:
     image: postgres:13.2-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: postgres
+      - POSTGRES_PASSWORD
     # ports:
     #   - 5432:5432 ## to connect from outside of the docker-internal network
     volumes:
