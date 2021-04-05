@@ -1,11 +1,15 @@
 import "./App.css";
+import React from "react";
+import StoriesPage from "./pages/Stories-Page";
+import Login from "./components/Login";
+import Router from "./components/Router";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <h3>Hello World</h3>
+      <Router />
     </div>
   );
-}
+};
 
 export default App;
