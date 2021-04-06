@@ -1,4 +1,5 @@
 import React from "react";
+import NewPost from "../components/New-Post";
 import Post from "../components/Post";
 import { useFetch } from "../services/useFetch";
 
@@ -7,6 +8,7 @@ const PostsPage = () => {
 
   return (
     <div>
+      <NewPost />
       {isloading ? (
         <div>load...</div>
       ) : (
