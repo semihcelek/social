@@ -7,6 +7,7 @@ const useUserStore = create(
     // calling a function to initialize the state feels wrong, search for it.
     user: getLocalUser(),
     setUser: (user) => set((state) => ({ ...state, user: user })),
+    removeUser: () => set({ user: {} }),
   }))
 );
 
