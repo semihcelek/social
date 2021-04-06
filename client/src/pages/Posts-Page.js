@@ -1,8 +1,8 @@
 import React from "react";
-import Story from "../components/Story";
+import Post from "../components/Post";
 import { useFetch } from "../services/useFetch";
 
-const StoriesPage = () => {
+const PostsPage = () => {
   const { data, isloading, error } = useFetch("/post/all/json");
 
   return (
@@ -12,7 +12,7 @@ const StoriesPage = () => {
       ) : (
         data.map((story) => (
           <div key={story.id}>
-            <Story
+            <Post
               title={story.title}
               content={story.content}
               author={story.author}
@@ -24,4 +24,4 @@ const StoriesPage = () => {
   );
 };
 
-export default StoriesPage;
+export default PostsPage;

@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 
-const Story = ({ title, content, author }) => {
+const Post = ({ title, content, author }) => {
   return (
     <div>
       <h3>{title}</h3>
@@ -10,10 +10,10 @@ const Story = ({ title, content, author }) => {
     </div>
   );
 };
-Story.propTypes = {
+Post.propTypes = {
   title: propTypes.string,
   content: propTypes.string,
   author: propTypes.string,
 };
 
-export default Story;
+export default Post;
