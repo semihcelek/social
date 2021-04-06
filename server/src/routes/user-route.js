@@ -11,7 +11,7 @@ router.get("/all/json", async (req, res, next) => {
   res.send(person);
 });
 
-router.get("/:id/json", auth, async (req, res, next) => {
+router.get("/ID:id/json", auth, async (req, res, next) => {
   const person = await User.findOne({
     include: Post,
     where: {
@@ -21,6 +21,19 @@ router.get("/:id/json", auth, async (req, res, next) => {
   console.log(person);
   person ? res.send(person) : res.status(404).end();
 });
+router.get("/:username/json", async (req, res, next) => {
+  const person = await User.findOne({
+    attributes: ["username", "firstName", "lastName", "email", "avatar"],
+    where: {
+      username: req.params.username,
+    },
+    // include: Post,
+  });
+  // const personsPosts = await person.getPosts();  // search for relational queries
+  // console.log(personsPosts);
+  person ? res.send(person) : res.status(404).end();
+});
+
 router.get("/:id/posts/json", auth, async (req, res, next) => {
   const posts = await Post.findAll({
     where: {
